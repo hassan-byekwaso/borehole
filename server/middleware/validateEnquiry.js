@@ -23,13 +23,15 @@ const requiredFields = [
 ]
 
 const serviceOptions = new Set([
-  'Borehole drilling',
-  'Hydrogeological survey',
-  'Geophysical survey',
-  'Borehole equipping',
-  'Solar water pumping',
-  'Water treatment',
-  'Other',
+  'Borehole Drilling',
+  'Borehole Camera',
+  'Borehole Equipping',
+  'Solar Borehole Equipping',
+  'Borehole Rehabilitation',
+  'Borehole Test Pumping',
+  'Pumps',
+  'Accessories',
+  'Towers and Steel Tanks',
 ])
 
 const contactPreferences = new Set(['email', 'whatsapp', 'either'])

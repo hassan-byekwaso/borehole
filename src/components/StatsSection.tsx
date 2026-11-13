@@ -5,6 +5,10 @@ import { Reveal } from './Reveal'
 const statisticIcons = [BriefcaseBusiness, Timer, MapPinned, BadgeCheck]
 
 export function StatsSection() {
+  if (siteContent.statistics.length === 0) {
+    return null
+  }
+
   return (
     <section
       id="statistics"

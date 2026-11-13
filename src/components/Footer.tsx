@@ -70,15 +70,21 @@ export function Footer() {
             </h2>
             <p className="mt-4 text-sm leading-6 text-slate-400">
               {siteContent.contact.email}
-              <br />
-              {siteContent.contact.phone}
+              {siteContent.contact.phone && (
+                <>
+                  <br />
+                  {siteContent.contact.phone}
+                </>
+              )}
               <br />
               {siteContent.contact.location}
             </p>
-            <p className="mt-4 inline-flex items-center gap-1 text-xs text-slate-500">
-              {siteContent.footer.socialPlaceholder}
-              <ArrowUpRight aria-hidden="true" size={12} />
-            </p>
+            {siteContent.footer.socialPlaceholder && (
+              <p className="mt-4 inline-flex items-center gap-1 text-xs text-slate-500">
+                {siteContent.footer.socialPlaceholder}
+                <ArrowUpRight aria-hidden="true" size={12} />
+              </p>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-3 pt-6 text-xs text-slate-500">
@@ -86,7 +92,9 @@ export function Footer() {
             <p>
               © {currentYear} {siteContent.brand.name}.
             </p>
-            <p>{siteContent.footer.pendingApproval}</p>
+            {siteContent.footer.pendingApproval && (
+              <p>{siteContent.footer.pendingApproval}</p>
+            )}
           </div>
           <p className="leading-6">
             {siteContent.labels.imageCredits}:{' '}

@@ -67,8 +67,8 @@ export function HeroSection() {
       </motion.div>
 
       <a
-        href="#statistics"
-        aria-label="Scroll to company information"
+        href="#services"
+        aria-label="Scroll to services"
         className="absolute bottom-8 right-8 hidden h-12 w-12 items-center justify-center rounded-full border border-white/30 text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:flex"
       >
         <ArrowDown aria-hidden="true" size={19} />

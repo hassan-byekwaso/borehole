@@ -62,6 +62,11 @@ const config = Object.freeze({
   clientOrigin: validateClientOrigin(readRequired('CLIENT_ORIGIN')),
   rateLimitWindowMs: readPositiveInteger('RATE_LIMIT_WINDOW_MS', 15 * 60 * 1000),
   rateLimitMaxRequests: readPositiveInteger('RATE_LIMIT_MAX_REQUESTS', 100),
+  resendApiKey: process.env.RESEND_API_KEY?.trim() || null,
+  enquiryNotificationEmail:
+    process.env.ENQUIRY_NOTIFICATION_EMAIL?.trim() || null,
+  resendFromEmail:
+    process.env.RESEND_FROM_EMAIL?.trim() || 'onboarding@resend.dev',
 })
 
 module.exports = config

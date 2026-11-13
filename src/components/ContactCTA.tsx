@@ -24,10 +24,12 @@ export function ContactCTA() {
               <Mail aria-hidden="true" size={15} className="text-sky-300" />
               {siteContent.contact.email}
             </span>
-            <span className="inline-flex items-center gap-2">
-              <Phone aria-hidden="true" size={15} className="text-sky-300" />
-              {siteContent.contact.phone}
-            </span>
+            {siteContent.contact.phone && (
+              <span className="inline-flex items-center gap-2">
+                <Phone aria-hidden="true" size={15} className="text-sky-300" />
+                {siteContent.contact.phone}
+              </span>
+            )}
             <span className="inline-flex items-center gap-2">
               <MapPin aria-hidden="true" size={15} className="text-sky-300" />
               {siteContent.contact.location}

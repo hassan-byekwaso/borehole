@@ -4,13 +4,15 @@ import { Mail, MapPin, Phone } from 'lucide-react'
 import { siteContent } from '../content/siteContent'
 
 const serviceOptions = [
-  'Borehole drilling',
-  'Hydrogeological survey',
-  'Geophysical survey',
-  'Borehole equipping',
-  'Solar water pumping',
-  'Water treatment',
-  'Other',
+  'Borehole Drilling',
+  'Borehole Camera',
+  'Borehole Equipping',
+  'Solar Borehole Equipping',
+  'Borehole Rehabilitation',
+  'Borehole Test Pumping',
+  'Pumps',
+  'Accessories',
+  'Towers and Steel Tanks',
 ] as const
 
 const contactOptions = [
@@ -312,8 +314,8 @@ export function ContactPage() {
               {siteContent.footer.contactHeading}
             </h2>
             <p className="mt-3 text-sm leading-6 text-blue-100/75">
-              Replace these editable placeholders with approved company
-              information before publishing.
+              Contact Drip Tech Solutions Ltd for borehole drilling and water
+              equipment enquiries.
             </p>
             <dl className="mt-8 space-y-6">
               <div className="flex gap-3">
@@ -331,19 +333,23 @@ export function ContactPage() {
                   </dd>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <Phone
-                  className="mt-0.5 shrink-0 text-sky-300"
-                  aria-hidden="true"
-                  size={18}
-                />
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-blue-100/65">
-                    Phone
-                  </dt>
-                  <dd className="mt-1 text-sm">{siteContent.contact.phone}</dd>
+              {siteContent.contact.phone && (
+                <div className="flex gap-3">
+                  <Phone
+                    className="mt-0.5 shrink-0 text-sky-300"
+                    aria-hidden="true"
+                    size={18}
+                  />
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wide text-blue-100/65">
+                      Phone
+                    </dt>
+                    <dd className="mt-1 text-sm">
+                      {siteContent.contact.phone}
+                    </dd>
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="flex gap-3">
                 <MapPin
                   className="mt-0.5 shrink-0 text-sky-300"

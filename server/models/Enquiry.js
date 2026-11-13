@@ -2,16 +2,33 @@ const { randomBytes } = require('node:crypto')
 const mongoose = require('mongoose')
 
 const serviceOptions = [
-  'Borehole drilling',
-  'Hydrogeological survey',
-  'Geophysical survey',
-  'Borehole equipping',
-  'Solar water pumping',
-  'Water treatment',
-  'Other',
+  'Borehole Drilling',
+  'Borehole Camera',
+  'Borehole Equipping',
+  'Solar Borehole Equipping',
+  'Borehole Rehabilitation',
+  'Borehole Test Pumping',
+  'Pumps',
+  'Accessories',
+  'Towers and Steel Tanks',
 ]
 
 const contactPreferences = ['email', 'whatsapp', 'either']
+
+const emailNotificationSchema = new mongoose.Schema(
+  {
+    status: {
+      type: String,
+      enum: ['pending', 'sent', 'failed'],
+      default: 'pending',
+      required: true,
+    },
+    attemptedAt: { type: Date },
+    sentAt: { type: Date },
+    error: { type: String, maxlength: 200 },
+  },
+  { _id: false },
+)
 
 function generateReference() {
   return `BH-${randomBytes(6).toString('hex').toUpperCase()}`
@@ -49,6 +66,10 @@ const enquirySchema = new mongoose.Schema(
       default: generateReference,
     },
     status: { type: String, default: 'pending' },
+    emailNotification: {
+      type: emailNotificationSchema,
+      default: () => ({}),
+    },
   },
   { timestamps: true, strict: 'throw' },
 )

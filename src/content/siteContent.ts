@@ -49,10 +49,12 @@ export interface ValueItem {
   description: string
 }
 
+const statistics: StatisticItem[] = []
+
 export const siteContent = {
   brand: {
-    name: 'Company Name',
-    descriptor: 'Water engineering',
+    name: 'Drip Tech Solutions Ltd',
+    descriptor: 'Every Drop Counts',
   },
   navigation: [
     { label: 'Home', href: '/' },
@@ -86,12 +88,12 @@ export const siteContent = {
       eyebrow: 'What we do',
       title: 'Water solutions for every stage of your project.',
       description:
-        'Explore the services that may support your water supply requirements. Project scope and capabilities will be confirmed with the company.',
+        'Borehole drilling, inspection, equipping, rehabilitation and pumping services, together with pumps, accessories, towers and steel tanks.',
     },
     about: {
       linkLabel: 'About the company',
       profileLabel: 'Company profile',
-      profileStatus: 'Details to be confirmed',
+      profileStatus: 'Every Drop Counts',
     },
     reasons: {
       eyebrow: 'Our approach',
@@ -124,17 +126,12 @@ export const siteContent = {
       eyebrow: 'Start a conversation',
     },
   },
-  statistics: [
-    { label: 'Completed projects', value: 'To be confirmed' },
-    { label: 'Years of experience', value: 'To be confirmed' },
-    { label: 'Counties served', value: 'To be confirmed' },
-    { label: 'Customer satisfaction', value: 'To be confirmed' },
-  ] satisfies StatisticItem[],
+  statistics,
   services: [
     {
       title: 'Borehole Drilling',
       description:
-        'Plan drilling scope around site conditions, anticipated water demand and assessment findings. Depth and water availability depend on local geology.',
+        'Borehole drilling services for residential, commercial, agricultural and institutional water needs.',
       icon: 'drilling',
       image: {
         src: boreholeRigImage,
@@ -142,9 +139,9 @@ export const siteContent = {
       },
     },
     {
-      title: 'Hydrogeological Surveys',
+      title: 'Borehole Camera',
       description:
-        'Review groundwater information and site factors to inform target selection and practical drilling recommendations.',
+        'Borehole camera inspection services to help assess borehole conditions.',
       icon: 'survey',
       image: {
         src: borewellSiteImage,
@@ -152,19 +149,48 @@ export const siteContent = {
       },
     },
     {
-      title: 'Geophysical Surveys',
+      title: 'Borehole Equipping',
       description:
-        'Investigate subsurface conditions to help identify promising groundwater targets. Survey findings guide decisions but cannot guarantee a water strike.',
-      icon: 'geophysics',
+        'Borehole equipping services for water supply installations.',
+      icon: 'equipment',
       image: {
         src: waterFacilityImage,
         alt: 'Water and land survey setting; illustrative service image',
       },
     },
     {
-      title: 'Borehole Equipping',
+      title: 'Solar Borehole Equipping',
       description:
-        'Plan pump and associated components around borehole testing, depth, water levels and intended demand.',
+        'Solar-powered equipment for borehole water supply systems.',
+      icon: 'solar',
+      image: {
+        src: borewellSiteImage,
+        alt: 'Borehole site; illustrative service image',
+      },
+    },
+    {
+      title: 'Borehole Rehabilitation',
+      description:
+        'Borehole rehabilitation services.',
+      icon: 'treatment',
+      image: {
+        src: solarIrrigationImage,
+        alt: 'Solar-powered agricultural water system; illustrative service image',
+      },
+    },
+    {
+      title: 'Borehole Test Pumping',
+      description:
+        'Borehole test pumping services.',
+      icon: 'equipment',
+      image: {
+        src: waterFacilityImage,
+        alt: 'Water facility; illustrative service image',
+      },
+    },
+    {
+      title: 'Pumps',
+      description: 'Pumps for borehole water systems.',
       icon: 'equipment',
       image: {
         src: borewellSiteImage,
@@ -172,23 +198,21 @@ export const siteContent = {
       },
     },
     {
-      title: 'Solar Water Pumping',
-      description:
-        'Consider solar arrays, controllers and pump sizing for site requirements and reduced reliance on grid power.',
-      icon: 'solar',
+      title: 'Accessories',
+      description: 'Accessories for borehole water systems.',
+      icon: 'equipment',
       image: {
-        src: solarIrrigationImage,
-        alt: 'Solar-powered agricultural water system; illustrative service image',
+        src: borewellSiteImage,
+        alt: 'Borehole site; illustrative service image',
       },
     },
     {
-      title: 'Water Treatment Solutions',
-      description:
-        'Consider treatment options in line with water-quality results and intended end use; the appropriate system depends on testing.',
-      icon: 'treatment',
+      title: 'Towers and Steel Tanks',
+      description: 'Towers and steel tanks for water storage systems.',
+      icon: 'equipment',
       image: {
         src: waterFacilityImage,
-        alt: 'Water management facility; illustrative service image',
+        alt: 'Water facility; illustrative service image',
       },
     },
   ] satisfies ServiceItem[],
@@ -341,7 +365,7 @@ export const siteContent = {
   projects: [
     {
       name: 'Residential water supply',
-      location: 'Location to be confirmed',
+      location: 'Illustrative example',
       category: 'Residential',
       description:
         'Demonstration content only. Replace with an approved project profile.',
@@ -352,7 +376,7 @@ export const siteContent = {
     },
     {
       name: 'Agricultural water system',
-      location: 'Location to be confirmed',
+      location: 'Illustrative example',
       category: 'Agricultural',
       description:
         'Demonstration content only. Replace with an approved project profile.',
@@ -363,7 +387,7 @@ export const siteContent = {
     },
     {
       name: 'Community water supply',
-      location: 'Location to be confirmed',
+      location: 'Illustrative example',
       category: 'Institutional',
       description:
         'Demonstration content only. Replace with an approved project profile.',
@@ -408,10 +432,10 @@ export const siteContent = {
   contact: {
     title: 'Looking for a Reliable Water Solution?',
     description:
-      'Share a little about your site and water requirements. Contact details and location below are editable placeholders pending company confirmation.',
-    email: 'Placeholder — add approved company email',
-    phone: 'Placeholder — add approved company phone',
-    location: 'Placeholder — add approved company location or service area',
+      'Share a little about your site and water requirements. Contact Drip Tech Solutions Ltd using the details below.',
+    email: 'DRIPTECHSOLUTIONS@GMAIL.COM',
+    phone: '',
+    location: 'Rehema House, Standard Street, P.O. Box 101849 - 00101, Nairobi.',
     contactPageTitle: 'Talk to us about your water requirements.',
     formTitle: 'Quotation enquiry',
     formDescription:
@@ -427,12 +451,12 @@ export const siteContent = {
   },
   footer: {
     aboutPlaceholder:
-      'Temporary brand identity. Company profile and contact details to be confirmed.',
-    pendingApproval: 'Company content pending approval.',
+      'Drip Tech Solutions Ltd — Every Drop Counts.',
+    pendingApproval: '',
     quickLinksHeading: 'Quick links',
     servicesHeading: 'Services',
     contactHeading: 'Contact',
-    socialPlaceholder: 'Social media links to be confirmed',
+    socialPlaceholder: '',
     imageCredits: [
       {
         label: 'Drilling rig: SCW / U.S. Navy',
