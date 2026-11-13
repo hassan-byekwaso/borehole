@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowUpRight, Droplets, Menu, X } from 'lucide-react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 import { siteContent } from '../content/siteContent'
 
@@ -18,17 +18,11 @@ export function Navbar() {
           onClick={() => setMenuOpen(false)}
           aria-label={`${siteContent.brand.name} home`}
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-950 text-sky-300">
-            <Droplets aria-hidden="true" size={23} strokeWidth={1.8} />
-          </span>
-          <span className="leading-tight">
-            <span className="block text-sm font-bold tracking-wide text-slate-950 sm:text-base">
-              {siteContent.brand.name}
-            </span>
-            <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-              {siteContent.brand.descriptor}
-            </span>
-          </span>
+          <img
+            src="/logo.png"
+            alt="Drip Tech Solutions Logo"
+            className="h-14 w-14 shrink-0 rounded-lg object-contain sm:h-16 sm:w-16"
+          />
         </Link>
 
         <button

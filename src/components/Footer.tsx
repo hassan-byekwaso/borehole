@@ -1,4 +1,4 @@
-import { ArrowUpRight, Droplets } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { siteContent } from '../content/siteContent'
 
@@ -10,18 +10,12 @@ export function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-[1.3fr_0.8fr_1fr_1fr]">
           <div>
-            <Link to="/" className="inline-flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-sky-300">
-                <Droplets aria-hidden="true" size={21} />
-              </span>
-              <span>
-                <span className="block text-sm font-bold">
-                  {siteContent.brand.name}
-                </span>
-                <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-                  {siteContent.brand.descriptor}
-                </span>
-              </span>
+            <Link to="/" aria-label={`${siteContent.brand.name} home`}>
+              <img
+                src="/logo.png"
+                alt="Drip Tech Solutions Logo"
+                className="h-14 w-14 rounded-lg bg-white object-contain sm:h-16 sm:w-16"
+              />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-6 text-slate-400">
               {siteContent.footer.aboutPlaceholder}
