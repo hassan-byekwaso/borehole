@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Mail, MapPin, Phone } from 'lucide-react'
+import { useSearchParams } from 'react-router-dom'
 import { siteContent } from '../content/siteContent'
 
 const serviceOptions = [
@@ -131,7 +132,16 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 export function ContactPage() {
-  const [values, setValues] = useState(initialValues)
+  const [searchParams] = useSearchParams()
+  const [values, setValues] = useState(() => {
+    const requestedService = searchParams.get('service')
+    return {
+      ...initialValues,
+      serviceRequired: serviceOptions.find(
+        (service) => service === requestedService,
+      ) ?? '',
+    }
+  })
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
   const [status, setStatus] = useState<SubmissionStatus>('idle')
   const [statusMessage, setStatusMessage] = useState('')

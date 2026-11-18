@@ -6,12 +6,14 @@ import { ProjectsSection } from '../components/ProjectsSection'
 import { ServicesSection } from '../components/ServicesSection'
 import { StatsSection } from '../components/StatsSection'
 import { TestimonialsSection } from '../components/TestimonialsSection'
+import { TrustBanner } from '../components/TrustBanner'
 import { WhyChooseUs } from '../components/WhyChooseUs'
 
 export function HomePage() {
   return (
     <main>
       <HeroSection />
+      <TrustBanner />
       <StatsSection />
       <ServicesSection />
       <AboutSection />

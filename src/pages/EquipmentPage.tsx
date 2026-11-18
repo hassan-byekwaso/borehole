@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
+import { ResilientImage } from '../components/ResilientImage'
 import { siteContent } from '../content/siteContent'
 
 export function EquipmentPage() {
@@ -16,12 +17,6 @@ export function EquipmentPage() {
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">
             {siteContent.equipment.description}
           </p>
-          <p
-            role="note"
-            className="mt-7 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950"
-          >
-            {siteContent.equipment.note}
-          </p>
         </div>
       </section>
       <section className="bg-slate-50 px-5 pb-20 sm:px-8">
@@ -29,24 +24,21 @@ export function EquipmentPage() {
           {siteContent.equipment.items.map((item) => (
             <article
               key={item.title}
-              className="overflow-hidden rounded-xl border border-slate-200 bg-white"
+              className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/5"
             >
-              <img
-                className="aspect-[16/10] w-full object-cover"
+              <ResilientImage
+                className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
                 src={item.image.src}
                 alt={item.image.alt}
                 loading="lazy"
                 decoding="async"
               />
-              <div className="p-5 sm:p-6">
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <h2 className="text-lg font-semibold text-slate-950">
                   {item.title}
                 </h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">
+                <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
                   {item.description}
-                </p>
-                <p className="mt-4 text-xs font-medium text-slate-500">
-                  Illustrative image; equipment shown is not a company inventory claim.
                 </p>
               </div>
             </article>

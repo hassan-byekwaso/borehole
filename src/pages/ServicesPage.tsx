@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
+import { ResilientImage } from '../components/ResilientImage'
 import { siteContent } from '../content/siteContent'
 
 export function ServicesPage() {
@@ -23,32 +24,29 @@ export function ServicesPage() {
           {siteContent.services.map((service) => (
             <article
               key={service.title}
-              className="group overflow-hidden rounded-xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/5"
+              className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/5"
             >
-              <div className="relative">
-                <img
-                  className="aspect-[16/10] w-full object-cover"
+              <div className="relative overflow-hidden bg-slate-100">
+                <ResilientImage
+                  className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
                   src={service.image.src}
                   alt={service.image.alt}
                   loading="lazy"
                   decoding="async"
                 />
-                <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
-                  Illustrative image
-                </span>
               </div>
-              <div className="p-5 sm:p-6">
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <h2 className="text-lg font-semibold text-slate-950">
                   {service.title}
                 </h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">
+                <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
                   {service.description}
                 </p>
                 <Link
-                  to="/contact"
+                  to={`/contact?service=${encodeURIComponent(service.title)}`}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-900 transition hover:text-sky-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
                 >
-                  Enquire about this service
+                  {siteContent.labels.serviceEnquiry}
                   <ArrowUpRight aria-hidden="true" size={15} />
                 </Link>
               </div>

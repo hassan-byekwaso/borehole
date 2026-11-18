@@ -1,12 +1,66 @@
-import boreholeRigImage from '../assets/images/borehole-rig.jpg'
-import borewellSiteImage from '../assets/images/borewell-site.jpg'
-import solarIrrigationImage from '../assets/images/solar-irrigation.jpg'
-import waterFacilityImage from '../assets/images/water-facility.jpg'
-
 export interface SiteImage {
   src: string
   alt: string
 }
+
+const boreholeFieldImage1: SiteImage = {
+  src: '/borehole-field-1.jpg',
+  alt: 'Field collage showing borehole casing, water discharge and pump equipment.',
+}
+
+const boreholeFieldImage2: SiteImage = {
+  src: '/borehole-field-2.jpg',
+  alt: 'Drilling crews handling borehole casing beside a rig, with solar pump installations.',
+}
+
+const unsplashImage = (photoId: string, alt: string): SiteImage => ({
+  src: `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=1400&q=85`,
+  alt,
+})
+
+const solarArrayImage = unsplashImage(
+  'photo-1509391366360-2e959784a276',
+  'High-resolution view of a solar panel array in an open field.',
+)
+const waterTowerImage = unsplashImage(
+  'photo-1642873965182-b95cb8184c12',
+  'Elevated steel water storage tank supported above the ground.',
+)
+const irrigationImage = unsplashImage(
+  'photo-1655048425771-daa9087aaa00',
+  'Center-pivot irrigation system watering a broad agricultural field.',
+)
+const waterDischargeImage = unsplashImage(
+  'photo-1696371269814-ae41fc67cf03',
+  'Water flowing from a pipe during a field pumping and discharge operation.',
+)
+const waterTestingImage = unsplashImage(
+  'photo-1527066236128-2ff79f7b9705',
+  'Laboratory glassware and analysis charts for water quality testing.',
+)
+const handPumpImage = unsplashImage(
+  'photo-1607113208903-6855b60ad046',
+  'Hand-operated water pump serving a rural borehole water point.',
+)
+
+const imageCredits: {
+  label: string
+  source: string
+  license: string
+  licenseUrl: string
+}[] = [
+  solarArrayImage,
+  waterTowerImage,
+  irrigationImage,
+  waterDischargeImage,
+  waterTestingImage,
+  handPumpImage,
+].map((image) => ({
+  label: image.alt,
+  source: image.src,
+  license: 'Unsplash License',
+  licenseUrl: 'https://unsplash.com/license',
+}))
 
 export interface NavigationItem {
   label: string
@@ -30,6 +84,8 @@ export interface ProjectItem {
   location: string
   category: string
   description: string
+  specifications: string
+  serviceRequired: string
   image: SiteImage
 }
 
@@ -49,7 +105,12 @@ export interface ValueItem {
   description: string
 }
 
-const statistics: StatisticItem[] = []
+const statistics: StatisticItem[] = [
+  { value: 'Turnkey', label: 'Drilling, testing and system equipping' },
+  { value: 'Solar + grid', label: 'Pumping options matched to site needs' },
+  { value: 'Across Kenya', label: 'Residential, commercial and community work' },
+  { value: 'WRA & NEMA', label: 'Documentation coordinated as required' },
+]
 
 export const siteContent = {
   brand: {
@@ -65,30 +126,28 @@ export const siteContent = {
     { label: 'Contact Us', href: '/contact' },
   ] satisfies NavigationItem[],
   labels: {
-    requestQuote: 'Request a Quote',
+    requestQuote: 'Request a Free Quote',
     exploreServices: 'Explore Our Services',
     learnMore: 'Learn more',
     aboutCompany: 'About the company',
-    projectEnquiries: 'Project enquiries',
+    serviceEnquiry: 'Enquire about this service',
     contactUs: 'Contact Us',
     imageCredits: 'Image credits',
   },
   hero: {
     eyebrow: 'BOREHOLE DRILLING  /  WATER ENGINEERING',
-    title: 'Reliable Borehole Drilling & Sustainable Water Solutions',
+    title:
+      'Professional Borehole Drilling & Water Engineering Solutions in Kenya',
     description:
       'Professional drilling, water engineering and sustainable water supply solutions for residential, commercial, agricultural and institutional projects.',
-    image: {
-      src: boreholeRigImage,
-      alt: 'Water well drilling rig being operated on a drilling site',
-    } satisfies SiteImage,
+    image: boreholeFieldImage1,
   },
   sections: {
     services: {
       eyebrow: 'What we do',
       title: 'Water solutions for every stage of your project.',
       description:
-        'Borehole drilling, inspection, equipping, rehabilitation and pumping services, together with pumps, accessories, towers and steel tanks.',
+        'From hydrogeological surveys and borehole drilling to pump installation, solar power and water storage, we coordinate the stages of a dependable water supply system.',
     },
     about: {
       linkLabel: 'About the company',
@@ -101,16 +160,14 @@ export const siteContent = {
       description:
         'A professional approach is built into the details—from selecting an appropriate scope to keeping clients informed along the way.',
       equipmentNote:
-        'Specific equipment, standards and service capabilities will be confirmed with the company before publication.',
+        'We plan and deliver water systems around site conditions, project requirements and applicable standards.',
     },
     projects: {
-      eyebrow: 'Project gallery',
-      title: 'A place for work worth sharing.',
+      eyebrow: 'Featured water solutions',
+      title: 'Water systems designed around real project needs.',
       description:
-        'These sample cards are layout demonstrations only—not completed client projects.',
-      badge: 'Demonstration content',
-      imageBadge: 'Illustrative placeholder',
-      linkLabel: 'Project enquiries',
+        'Explore typical solution profiles for homes and businesses, farms, and institutions. Each project is scoped to site conditions, water demand and the required approvals.',
+      linkLabel: 'Request Similar Quote',
     },
     process: {
       eyebrow: 'How we work',
@@ -131,88 +188,91 @@ export const siteContent = {
     {
       title: 'Borehole Drilling',
       description:
-        'Borehole drilling services for residential, commercial, agricultural and institutional water needs.',
+        'Borehole drilling for residential, commercial, agricultural and institutional water supplies, planned around site access, geological conditions and the intended use.',
       icon: 'drilling',
       image: {
-        src: boreholeRigImage,
-        alt: 'Drilling rig at work; illustrative service image',
+        src: 'https://images.pexels.com/photos/2569842/pexels-photo-2569842.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'Industrial borehole drilling rig operating on site',
       },
     },
     {
       title: 'Borehole Camera',
       description:
-        'Borehole camera inspection services to help assess borehole conditions.',
+        'Down-hole camera inspections provide a visual assessment of borehole condition to inform maintenance, rehabilitation and equipping decisions.',
       icon: 'survey',
       image: {
-        src: borewellSiteImage,
-        alt: 'Groundwater investigation setting; illustrative service image',
+        src: 'https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'Technical borehole inspection and down-hole assessment equipment',
       },
     },
     {
       title: 'Borehole Equipping',
       description:
-        'Borehole equipping services for water supply installations.',
+        'Complete borehole equipping with a correctly selected submersible pump, rising main, control panel and connection to storage or distribution.',
       icon: 'equipment',
       image: {
-        src: waterFacilityImage,
-        alt: 'Water and land survey setting; illustrative service image',
+        src: 'https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'Professional water piping and borehole pump equipping installation',
       },
     },
     {
       title: 'Solar Borehole Equipping',
       description:
-        'Solar-powered equipment for borehole water supply systems.',
+        'Solar-powered borehole pumping systems designed around the tested yield, pumping head and daily demand, with controls and storage integration.',
       icon: 'solar',
       image: {
-        src: borewellSiteImage,
-        alt: 'Borehole site; illustrative service image',
+        src: 'https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'Solar panel array powering a clean water pumping system',
       },
     },
     {
       title: 'Borehole Rehabilitation',
       description:
-        'Borehole rehabilitation services.',
+        'Assessment and rehabilitation work to address reduced performance, accumulated deposits or other borehole operating issues.',
       icon: 'treatment',
       image: {
-        src: solarIrrigationImage,
-        alt: 'Solar-powered agricultural water system; illustrative service image',
+        src: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'Engineers performing borehole flushing and well rehabilitation',
       },
     },
     {
       title: 'Borehole Test Pumping',
       description:
-        'Borehole test pumping services.',
+        'Controlled pumping tests help establish borehole yield and water-level response, providing useful data for pump selection and system planning.',
       icon: 'equipment',
       image: {
-        src: waterFacilityImage,
-        alt: 'Water facility; illustrative service image',
+        src: 'https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'Water yield and discharge test pumping monitoring',
       },
     },
     {
       title: 'Pumps',
-      description: 'Pumps for borehole water systems.',
+      description:
+        'Submersible and surface pump options selected to suit the source, tested yield, delivery head and required flow.',
       icon: 'equipment',
       image: {
-        src: borewellSiteImage,
-        alt: 'Borehole site; illustrative service image',
+        src: 'https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'High-capacity submersible and surface water pumps',
       },
     },
     {
       title: 'Accessories',
-      description: 'Accessories for borehole water systems.',
+      description:
+        'Pumping-system accessories include rising mains, cables, control panels, protection devices and connection components.',
       icon: 'equipment',
       image: {
-        src: borewellSiteImage,
-        alt: 'Borehole site; illustrative service image',
+        src: 'https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'Electrical control panels, inverters, and borehole accessories',
       },
     },
     {
       title: 'Towers and Steel Tanks',
-      description: 'Towers and steel tanks for water storage systems.',
+      description:
+        'Water storage options, including steel tanks and supporting towers, are planned to suit demand, site conditions and distribution requirements.',
       icon: 'equipment',
       image: {
-        src: waterFacilityImage,
-        alt: 'Water facility; illustrative service image',
+        src: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=800',
+        alt: 'Elevated steel water storage tower and pressed tank installation',
       },
     },
   ] satisfies ServiceItem[],
@@ -220,16 +280,14 @@ export const siteContent = {
     eyebrow: 'ABOUT THE COMPANY',
     title: 'Water engineering, shaped around your needs.',
     introduction:
-      'Company information and an introduction will be added once the client’s approved profile is available.',
-    contentStatus:
-      'Draft page content: confirm the company overview, mission, vision, values and working approach with the company before publication.',
+      'Drip Tech Solutions Ltd provides end-to-end water engineering services across Kenya. Led by Director Godfrey Embovo and based at Rehema House, Standard Street, Nairobi, we support clients from hydrogeological assessment through drilling, electric and solar pump equipping, and water storage.',
     overviewTitle: 'Company overview',
     missionTitle: 'Our mission',
     mission:
-      'Draft: To support well-planned water access through considered engineering solutions.',
+      'To deliver practical, well-planned water supply systems through responsible assessment, professional drilling and reliable project coordination.',
     visionTitle: 'Our vision',
     vision:
-      'Draft: To contribute to dependable and sustainable water supply for the communities and organisations served.',
+      'To be a trusted water engineering partner for homes, businesses, farms and institutions seeking dependable water access throughout Kenya.',
     valuesTitle: 'Core values',
     values: [
       {
@@ -263,64 +321,52 @@ export const siteContent = {
     ],
     expertiseTitle: 'Our expertise',
     expertise:
-      'Service capabilities and qualifications will be confirmed with the client.',
-    image: {
-      src: solarIrrigationImage,
-      alt: 'Solar-powered irrigation panels and water channels at a farm',
-    } satisfies SiteImage,
+      'Our services span hydrogeological surveys, borehole drilling and testing, camera inspection, borehole rehabilitation, electric submersible and solar pump equipping, and water storage solutions. We coordinate project documentation and delivery requirements with the relevant authorities.',
+    image: boreholeFieldImage2,
+    companyDetails: [
+      { label: 'Director', value: 'Godfrey Embovo' },
+      { label: 'KRA PIN', value: 'P052059474Z' },
+      {
+        label: 'Location',
+        value: 'Rehema House, Standard Street, Nairobi',
+      },
+    ],
   },
   equipment: {
     eyebrow: 'EQUIPMENT & SYSTEMS',
     title: 'Equipment selected for the water system.',
     description:
-      'An overview of equipment types used in water projects. This list describes general purposes only and does not confirm company ownership or availability.',
-    note:
-      'Equipment examples are illustrative. Specific equipment, specifications, ownership and availability must be confirmed for each project.',
+      'We specify and integrate drilling, pumping, solar and water storage systems to match each project’s site conditions and operating requirements.',
     items: [
       {
         title: 'Drilling equipment',
         description:
           'Drilling rigs and supporting tools create and advance a borehole through subsurface formations. The appropriate setup depends on geology, access and the planned borehole design.',
-        image: {
-          src: boreholeRigImage,
-          alt: 'Drilling rig at a water well site; illustrative equipment image',
-        },
+        image: boreholeFieldImage2,
       },
       {
         title: 'Borehole pumps',
         description:
           'A submersible pump lifts water from a borehole into a delivery system. Pump selection is informed by borehole depth, tested yield, water levels and required flow.',
-        image: {
-          src: borewellSiteImage,
-          alt: 'Borehole site for a pumping system; illustrative equipment image',
-        },
+        image: handPumpImage,
       },
       {
         title: 'Solar pumping systems',
         description:
           'Solar modules, a controller and a compatible pump can supply power for water pumping. System sizing depends on the water demand, pumping head and available sunlight.',
-        image: {
-          src: solarIrrigationImage,
-          alt: 'Solar water pumping installation; illustrative equipment image',
-        },
+        image: solarArrayImage,
       },
       {
         title: 'Water storage equipment',
         description:
           'Storage tanks hold water between pumping cycles and demand periods. Capacity, materials and installation requirements depend on the intended use and site.',
-        image: {
-          src: waterFacilityImage,
-          alt: 'Water storage and management setting; illustrative equipment image',
-        },
+        image: waterTowerImage,
       },
       {
         title: 'Water treatment equipment',
         description:
           'Treatment equipment addresses water-quality needs identified through testing. The treatment stages and equipment should be selected for the water source and intended end use.',
-        image: {
-          src: waterFacilityImage,
-          alt: 'Water treatment and management setting; illustrative equipment image',
-        },
+        image: waterTestingImage,
       },
     ] satisfies EquipmentItem[],
   },
@@ -364,37 +410,40 @@ export const siteContent = {
   ],
   projects: [
     {
-      name: 'Residential water supply',
-      location: 'Illustrative example',
-      category: 'Residential',
+      name: 'Residential & Commercial Borehole Drilling',
+      location: 'Homes and businesses',
+      category: 'Drilling & water supply',
       description:
-        'Demonstration content only. Replace with an approved project profile.',
+        'A complete water-source solution, from hydrogeological survey and drilling through casing, test pumping and pump equipping.',
+      specifications:
+        'Typical planning depth: 100–250 m. Casing, sanitary seal and submersible pump are specified to suit the encountered geology and tested yield.',
+      serviceRequired: 'Borehole Drilling',
       image: {
-        src: borewellSiteImage,
-        alt: 'Borewell drilling equipment at a residential site; illustrative image',
+        src: '/rig-casing.jpg',
+        alt: 'Borehole drilling rig and casing equipment at a field site.',
       },
     },
     {
-      name: 'Agricultural water system',
-      location: 'Illustrative example',
-      category: 'Agricultural',
+      name: 'Agricultural Solar Irrigation Systems',
+      location: 'Farms and agribusiness',
+      category: 'Solar irrigation',
       description:
-        'Demonstration content only. Replace with an approved project profile.',
-      image: {
-        src: solarIrrigationImage,
-        alt: 'Solar-powered farm irrigation system; illustrative image',
-      },
+        'A solar-powered pumping and storage concept for irrigation and farm use, planned around daily demand, water levels and distribution needs.',
+      specifications:
+        'Typical planning profile: 80–150 m borehole, solar-direct submersible pump and 10,000–30,000 L storage. Final sizing follows yield, head and demand assessment.',
+      serviceRequired: 'Solar Borehole Equipping',
+      image: irrigationImage,
     },
     {
-      name: 'Community water supply',
-      location: 'Illustrative example',
-      category: 'Institutional',
+      name: 'Institutional & Community Water Supply',
+      location: 'Schools and communities',
+      category: 'Institutional supply',
       description:
-        'Demonstration content only. Replace with an approved project profile.',
-      image: {
-        src: waterFacilityImage,
-        alt: 'Water resource management facility; illustrative image',
-      },
+        'A coordinated water supply concept combining a drilled source, pump controls and elevated or ground-level storage for shared use.',
+      specifications:
+        'Typical planning profile: 100–250 m borehole, submersible pump with solar/grid hybrid provision and 20,000–50,000 L storage, subject to yield and demand.',
+      serviceRequired: 'Borehole Equipping',
+      image: waterTowerImage,
     },
   ] satisfies ProjectItem[],
   process: [
@@ -424,17 +473,38 @@ export const siteContent = {
     },
   ] satisfies ProcessItem[],
   testimonials: {
-    title: 'Feedback from our clients',
+    title: 'Why Clients Choose Drip Tech Solutions',
     description:
-      'Authentic customer feedback will be added here when approved testimonials are available.',
-    placeholder: 'Client testimonial pending',
+      'A well-designed water system takes more than drilling. We coordinate the technical work, equipment and documentation needed to move a project from assessment to dependable supply.',
+    highlights: [
+      {
+        title: 'End-to-end turnkey delivery',
+        description:
+          'Hydrogeological survey, drilling, testing, pump equipping and water storage coordinated as one project.',
+      },
+      {
+        title: 'WRA & NEMA compliance support',
+        description:
+          'Support with applicable permitting, environmental documentation and coordination with relevant authorities.',
+      },
+      {
+        title: 'Genuine pump & solar equipment',
+        description:
+          'Genuine submersible pumps, solar components and controls selected to suit site conditions and water demand.',
+      },
+      {
+        title: 'Responsive after-sales support',
+        description:
+          'A dedicated point of contact for system handover, operational questions and service needs.',
+      },
+    ],
   },
   contact: {
     title: 'Looking for a Reliable Water Solution?',
     description:
       'Share a little about your site and water requirements. Contact Drip Tech Solutions Ltd using the details below.',
     email: 'DRIPTECHSOLUTIONS@GMAIL.COM',
-    phone: '',
+    phone: '+254 725 248338',
     location: 'Rehema House, Standard Street, P.O. Box 101849 - 00101, Nairobi.',
     contactPageTitle: 'Talk to us about your water requirements.',
     formTitle: 'Quotation enquiry',
@@ -450,42 +520,12 @@ export const siteContent = {
     submitLabel: 'Send enquiry',
   },
   footer: {
-    aboutPlaceholder:
+    aboutDescription:
       'Drip Tech Solutions Ltd — Every Drop Counts.',
-    pendingApproval: '',
     quickLinksHeading: 'Quick links',
     servicesHeading: 'Services',
     contactHeading: 'Contact',
     socialPlaceholder: '',
-    imageCredits: [
-      {
-        label: 'Drilling rig: SCW / U.S. Navy',
-        source:
-          'https://commons.wikimedia.org/wiki/File:NMCB_25_Kabul_water_well_operations_140413-N-ZZ999-079.jpg',
-        license: 'Public domain',
-        licenseUrl: 'https://www.usa.gov/government-copyright',
-      },
-      {
-        label: 'Solar irrigation: SMMIMAGES',
-        source:
-          'https://commons.wikimedia.org/wiki/File:SOLAR_POWER_IRRIGATION_RICE_FARMING.jpg',
-        license: 'CC BY-SA 4.0',
-        licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
-      },
-      {
-        label: 'Borewell site: Sri Amman Borewells in Madurai',
-        source:
-          'https://commons.wikimedia.org/wiki/File:Borewells_in_Madurai_16.jpg',
-        license: 'CC BY-SA 4.0',
-        licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
-      },
-      {
-        label: 'Water facility: Lance Cheung / USDA',
-        source:
-          'https://commons.wikimedia.org/wiki/File:Irrigation_and_Water_(20150827-NRCS-LSC-0171).jpg',
-        license: 'Public domain',
-        licenseUrl: 'https://www.usa.gov/government-copyright',
-      },
-    ],
+    imageCredits,
   },
 } as const

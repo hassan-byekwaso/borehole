@@ -61,10 +61,15 @@ function createEnquiryRouter({
       let notificationError
       try {
         await sendNotification(enquiry)
-      } catch {
+      } catch (error) {
         notificationStatus = 'failed'
         notificationError = 'Email delivery failed.'
-        console.error('Enquiry notification delivery failed.')
+        const notice =
+          error instanceof Error &&
+          error.message === 'Email notifications are not configured.'
+            ? 'Email notification skipped: email service not configured.'
+            : 'Email notification skipped: delivery unavailable.'
+        console.info(notice)
       }
 
       enquiry.emailNotification.status = notificationStatus

@@ -18,8 +18,18 @@ export function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-6 text-slate-400">
-              {siteContent.footer.aboutPlaceholder}
+              {siteContent.footer.aboutDescription}
             </p>
+            <dl className="mt-5 space-y-3 text-sm">
+              {siteContent.about.companyDetails.map((detail) => (
+                <div key={detail.label}>
+                  <dt className="font-semibold text-slate-300">
+                    {detail.label}
+                  </dt>
+                  <dd className="mt-0.5 text-slate-400">{detail.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
           <div>
@@ -86,36 +96,35 @@ export function Footer() {
             <p>
               © {currentYear} {siteContent.brand.name}.
             </p>
-            {siteContent.footer.pendingApproval && (
-              <p>{siteContent.footer.pendingApproval}</p>
-            )}
           </div>
-          <p className="leading-6">
-            {siteContent.labels.imageCredits}:{' '}
-            {siteContent.footer.imageCredits.map((credit, index) => (
-              <span key={credit.source}>
-                {index > 0 && ' · '}
-                <a
-                  className="underline decoration-slate-600 underline-offset-2 transition hover:text-white"
-                  href={credit.source}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {credit.label}
-                </a>
-                {' ('}
-                <a
-                  className="underline decoration-slate-600 underline-offset-2 transition hover:text-white"
-                  href={credit.licenseUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {credit.license}
-                </a>
-                {')'}
-              </span>
-            ))}
-          </p>
+          {siteContent.footer.imageCredits.length > 0 && (
+            <p className="leading-6">
+              {siteContent.labels.imageCredits}:{' '}
+              {siteContent.footer.imageCredits.map((credit, index) => (
+                <span key={credit.source}>
+                  {index > 0 && ' · '}
+                  <a
+                    className="underline decoration-slate-600 underline-offset-2 transition hover:text-white"
+                    href={credit.source}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {credit.label}
+                  </a>
+                  {' ('}
+                  <a
+                    className="underline decoration-slate-600 underline-offset-2 transition hover:text-white"
+                    href={credit.licenseUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {credit.license}
+                  </a>
+                  {')'}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
       </div>
     </footer>

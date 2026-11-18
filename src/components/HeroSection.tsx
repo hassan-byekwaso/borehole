@@ -12,14 +12,21 @@ export function HeroSection() {
       className="relative isolate flex min-h-[640px] scroll-mt-20 items-center overflow-hidden bg-blue-950 sm:min-h-[700px]"
       aria-labelledby="hero-title"
     >
-      <img
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="/borehole-field-2.jpg"
+        preload="metadata"
+        aria-hidden="true"
         className="absolute inset-0 -z-20 h-full w-full object-cover"
-        src={siteContent.hero.image.src}
-        alt={siteContent.hero.image.alt}
-        fetchPriority="high"
-      />
+      >
+        <source src="/drilling-hero.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 -z-10 bg-black/50" aria-hidden="true" />
       <div
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-blue-950/95 via-blue-950/75 to-blue-950/35"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-blue-950/80 via-blue-950/55 to-blue-950/20"
         aria-hidden="true"
       />
       <div
@@ -55,13 +62,14 @@ export function HeroSection() {
               {siteContent.labels.requestQuote}
               <ArrowRight aria-hidden="true" size={17} />
             </Link>
-            <Link
-              to="/services"
-              className="inline-flex min-h-14 items-center justify-center gap-3 rounded-lg border border-white/35 bg-white/5 px-6 text-sm font-semibold text-white transition hover:border-white/70 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              {siteContent.labels.exploreServices}
-              <ArrowDown aria-hidden="true" size={17} />
-            </Link>
+            {siteContent.contact.phone && (
+              <a
+                href={`tel:${siteContent.contact.phone.replace(/[^\d+]/g, '')}`}
+                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-lg border border-white/35 bg-white/5 px-6 text-sm font-semibold text-white transition hover:border-white/70 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Call Us Now
+              </a>
+            )}
           </div>
         </div>
       </motion.div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, MapPin } from 'lucide-react'
+import { ResilientImage } from '../components/ResilientImage'
 import { siteContent } from '../content/siteContent'
 
 export function ProjectsPage() {
@@ -11,16 +12,10 @@ export function ProjectsPage() {
             {siteContent.sections.projects.eyebrow}
           </p>
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-slate-950 sm:text-5xl">
-            Water project gallery
+            Featured water solution showcases
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">
             {siteContent.sections.projects.description}
-          </p>
-          <p
-            role="note"
-            className="mt-7 inline-flex rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-xs font-semibold text-amber-950"
-          >
-            {siteContent.sections.projects.badge}
           </p>
         </div>
       </section>
@@ -29,21 +24,18 @@ export function ProjectsPage() {
           {siteContent.projects.map((project) => (
             <article
               key={project.name}
-              className="overflow-hidden rounded-xl border border-slate-200 bg-white"
+              className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5"
             >
-              <div className="relative">
-                <img
-                  className="aspect-[4/3] w-full object-cover"
+              <div className="relative overflow-hidden">
+                <ResilientImage
+                  className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
                   src={project.image.src}
                   alt={project.image.alt}
                   loading="lazy"
                   decoding="async"
                 />
-                <span className="absolute left-4 top-4 rounded-md bg-white/95 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-amber-950 shadow-sm">
-                  {siteContent.sections.projects.imageBadge}
-                </span>
               </div>
-              <div className="p-5 sm:p-6">
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="text-xs font-bold uppercase tracking-[0.14em] text-sky-700">
                     {project.category}
@@ -56,14 +48,20 @@ export function ProjectsPage() {
                 <h2 className="mt-3 text-lg font-semibold text-slate-950">
                   {project.name}
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
+                <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">
                   {project.description}
                 </p>
+                <p className="mt-4 rounded-lg bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-600">
+                  <span className="font-semibold text-slate-800">
+                    Typical design profile:{' '}
+                  </span>
+                  {project.specifications}
+                </p>
                 <Link
-                  to="/contact"
+                  to={`/contact?service=${encodeURIComponent(project.serviceRequired)}`}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-900 hover:text-sky-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
                 >
-                  {siteContent.labels.projectEnquiries}
+                  {siteContent.sections.projects.linkLabel}
                   <ArrowUpRight aria-hidden="true" size={15} />
                 </Link>
               </div>

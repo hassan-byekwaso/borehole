@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Check } from 'lucide-react'
+import { ResilientImage } from '../components/ResilientImage'
 import { siteContent } from '../content/siteContent'
 
 export function AboutPage() {
@@ -16,12 +17,6 @@ export function AboutPage() {
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">
             {siteContent.about.introduction}
           </p>
-          <p
-            role="note"
-            className="mt-8 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950"
-          >
-            {siteContent.about.contentStatus}
-          </p>
         </div>
       </section>
 
@@ -37,8 +32,23 @@ export function AboutPage() {
             <p className="mt-4 text-sm leading-6 text-slate-500">
               {siteContent.about.expertise}
             </p>
+            <dl className="mt-6 grid gap-3 sm:grid-cols-3">
+              {siteContent.about.companyDetails.map((detail) => (
+                <div
+                  key={detail.label}
+                  className="rounded-lg border border-slate-200 bg-white p-4"
+                >
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    {detail.label}
+                  </dt>
+                  <dd className="mt-1 text-sm font-semibold text-slate-900">
+                    {detail.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <img
+          <ResilientImage
             className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lg shadow-slate-900/10"
             src={siteContent.about.image.src}
             alt={siteContent.about.image.alt}
@@ -81,7 +91,7 @@ export function AboutPage() {
             {siteContent.about.valuesTitle}
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
-            Proposed working principles, subject to company approval.
+            We put careful planning, safe delivery and clear communication at the centre of every project.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {siteContent.about.values.map((value) => (
@@ -111,8 +121,7 @@ export function AboutPage() {
               {siteContent.about.capabilitiesTitle}
             </h2>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              Service descriptions are introductory; project scope and
-              availability should be confirmed directly.
+              Our team coordinates the key stages of a water supply project, from initial assessment to a system ready for operation.
             </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {siteContent.services.map((service) => (
@@ -130,7 +139,7 @@ export function AboutPage() {
               {siteContent.about.approachTitle}
             </h2>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              Proposed approach — confirm with the company before publication.
+              Each project follows a practical sequence tailored to the site, water demand and applicable requirements.
             </p>
             <ol className="mt-6 space-y-4">
               {siteContent.about.approach.map((item, index) => (

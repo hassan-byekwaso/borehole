@@ -14,13 +14,24 @@ export function AboutSection() {
         <Reveal>
           <div className="relative mx-auto max-w-xl lg:mx-0">
             <div className="absolute -left-5 -top-5 h-28 w-28 rounded-tl-[2rem] border-l border-t border-sky-300" />
-            <img
-              className="relative aspect-[4/3] w-full rounded-2xl object-cover shadow-xl shadow-blue-950/10"
-              src={siteContent.about.image.src}
-              alt={siteContent.about.image.alt}
-              loading="lazy"
-              decoding="async"
-            />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-blue-950 shadow-xl shadow-blue-950/10">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/borehole-field-2.jpg"
+                preload="metadata"
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover"
+              >
+                <source src="/team-field.mp4" type="video/mp4" />
+              </video>
+              <div
+                className="absolute inset-0 bg-black/40"
+                aria-hidden="true"
+              />
+            </div>
             <div className="absolute -bottom-5 right-4 rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-lg sm:right-8">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                 {siteContent.sections.about.profileLabel}
@@ -77,6 +88,21 @@ export function AboutSection() {
               {siteContent.labels.aboutCompany}
               <ArrowUpRight aria-hidden="true" size={16} />
             </Link>
+            <dl className="mt-8 grid gap-3 sm:grid-cols-3">
+              {siteContent.about.companyDetails.map((detail) => (
+                <div
+                  key={detail.label}
+                  className="rounded-lg border border-slate-200 bg-slate-50 p-4"
+                >
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    {detail.label}
+                  </dt>
+                  <dd className="mt-1 text-sm font-semibold text-slate-900">
+                    {detail.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </Reveal>
       </div>

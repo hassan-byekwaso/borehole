@@ -111,12 +111,12 @@ test('a successfully sent notification is recorded and returns the existing 201 
   assert.ok(testServer.saved.get('BH-TEST123').sentAt instanceof Date)
 })
 
-test('an email failure preserves the enquiry, records a safe failure, and returns 201', async (t) => {
-  const originalError = console.error
+test('an email delivery failure is non-blocking and logs a safe notice', async (t) => {
+  const originalInfo = console.info
   const logMessages = []
-  console.error = (...values) => logMessages.push(values.join(' '))
+  console.info = (...values) => logMessages.push(values.join(' '))
   t.after(() => {
-    console.error = originalError
+    console.info = originalInfo
   })
 
   const testServer = await startTestServer(async () => {
@@ -135,7 +135,35 @@ test('an email failure preserves the enquiry, records a safe failure, and return
   assert.ok(savedEnquiry.attemptedAt instanceof Date)
   assert.equal(savedEnquiry.sentAt, undefined)
   assert.equal(savedEnquiry.error, 'Email delivery failed.')
+  assert.deepEqual(logMessages, [
+    'Email notification skipped: delivery unavailable.',
+  ])
   assert.doesNotMatch(logMessages.join(' '), /secret-api-key|customer@example\.test/)
+})
+
+test('an unconfigured email service is non-blocking and logs a gentle notice', async (t) => {
+  const originalInfo = console.info
+  const logMessages = []
+  console.info = (...values) => logMessages.push(values.join(' '))
+  t.after(() => {
+    console.info = originalInfo
+  })
+
+  const testServer = await startTestServer(async () => {
+    throw new Error('Email notifications are not configured.')
+  })
+  t.after(() => testServer.close())
+
+  const response = await testServer.submit()
+  const body = await response.json()
+
+  assert.equal(response.status, 201)
+  assert.equal(body.success, true)
+  assert.equal(body.reference, 'BH-TEST123')
+  assert.equal(testServer.saved.get('BH-TEST123').status, 'failed')
+  assert.deepEqual(logMessages, [
+    'Email notification skipped: email service not configured.',
+  ])
 })
 
 test('HTML escaping neutralizes special characters in untrusted values', () => {
