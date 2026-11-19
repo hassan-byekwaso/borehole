@@ -50,9 +50,7 @@ const initialValues: FormValues = {
   whatsappConsent: false,
 }
 
-const apiBaseUrl = (
-  import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'
-).replace(/\/+$/, '')
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/+$/, '')
 
 const inputClassName =
   'min-h-11 min-w-0 rounded-lg border border-slate-300 px-3 text-base font-normal outline-none transition focus:border-blue-700 focus:ring-2 focus:ring-blue-700/20'

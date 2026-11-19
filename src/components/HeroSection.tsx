@@ -12,25 +12,14 @@ export function HeroSection() {
       className="relative isolate flex min-h-[640px] scroll-mt-20 items-center overflow-hidden bg-blue-950 sm:min-h-[700px]"
       aria-labelledby="hero-title"
     >
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        poster="/borehole-field-2.jpg"
-        preload="metadata"
+      <img
+        src={siteContent.hero.image.src}
+        alt=""
         aria-hidden="true"
         className="absolute inset-0 -z-20 h-full w-full object-cover"
-      >
-        <source src="/drilling-hero.mp4" type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 -z-10 bg-black/50" aria-hidden="true" />
-      <div
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-blue-950/80 via-blue-950/55 to-blue-950/20"
-        aria-hidden="true"
       />
       <div
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-blue-950/45 via-transparent to-blue-950/20"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-blue-950/75 via-blue-950/45 to-blue-950/10"
         aria-hidden="true"
       />
 

@@ -19,21 +19,21 @@ export function ServicesSection() {
             description={siteContent.sections.services.description}
           />
         </Reveal>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <Reveal>
             <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-lg hover:shadow-slate-900/5">
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                 <ResilientImage
                   src="/rig-casing.jpg"
                   alt="Industrial borehole drilling rig installing PVC casing pipe on site"
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
               <div className="flex flex-1 flex-col p-6 sm:p-7">
                 <h3 className="text-lg font-semibold text-slate-950">
-                  Borehole casing installation
+                  Borehole Casing Installation
                 </h3>
                 <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
                   On-site installation of PVC casing as part of borehole
@@ -44,27 +44,18 @@ export function ServicesSection() {
           </Reveal>
           <Reveal delay={0.06}>
             <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-lg hover:shadow-slate-900/5">
-              <div className="relative aspect-[4/3] overflow-hidden bg-blue-950">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster="/borehole-field-2.jpg"
-                  preload="metadata"
-                  aria-hidden="true"
-                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                >
-                  <source src="/team-field.mp4" type="video/mp4" />
-                </video>
-                <div
-                  className="absolute inset-0 bg-black/20"
-                  aria-hidden="true"
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                <ResilientImage
+                  src="/borehole-field-2.jpg"
+                  alt="Drip Tech Solutions Ltd field crew installing borehole equipment in Kenya."
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="flex flex-1 flex-col p-6 sm:p-7">
                 <h3 className="text-lg font-semibold text-slate-950">
-                  Field operations
+                  Field Operations
                 </h3>
                 <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
                   Technical crews working on borehole casing and pump
@@ -73,15 +64,19 @@ export function ServicesSection() {
               </div>
             </article>
           </Reveal>
-          {siteContent.services.map((service, index) => {
-            return (
+          {siteContent.services
+            .filter(
+              (service) =>
+                service.title !== 'Pumps' && service.title !== 'Accessories',
+            )
+            .map((service, index) => (
               <Reveal key={service.title} delay={(index % 3) * 0.06}>
                 <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-lg hover:shadow-slate-900/5">
-                  <div className="aspect-[4/3] overflow-hidden bg-slate-100">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                     <ResilientImage
                       src={service.image.src}
                       alt={service.image.alt}
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                       loading="lazy"
                       decoding="async"
                     />
@@ -103,8 +98,7 @@ export function ServicesSection() {
                   </div>
                 </article>
               </Reveal>
-            )
-          })}
+            ))}
         </div>
       </div>
     </section>

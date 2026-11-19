@@ -20,7 +20,7 @@ export function AboutSection() {
                 loop
                 muted
                 playsInline
-                poster="/borehole-field-2.jpg"
+                poster={siteContent.about.image.src}
                 preload="metadata"
                 aria-hidden="true"
                 className="absolute inset-0 h-full w-full object-cover"

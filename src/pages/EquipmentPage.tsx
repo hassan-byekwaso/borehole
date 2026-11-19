@@ -26,13 +26,15 @@ export function EquipmentPage() {
               key={item.title}
               className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/5"
             >
-              <ResilientImage
-                className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105"
-                src={item.image.src}
-                alt={item.image.alt}
-                loading="lazy"
-                decoding="async"
-              />
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                <ResilientImage
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
               <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <h2 className="text-lg font-semibold text-slate-950">
                   {item.title}
