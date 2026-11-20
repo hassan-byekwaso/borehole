@@ -42,9 +42,13 @@ app.use('/api/enquiries', enquiryRoutes)
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)
 
-const server = app.listen(config.port, () => {
-  console.info(`Backend listening on port ${config.port}.`)
-  void connectDatabase(config.mongoUri)
-})
+let server
+
+if (require.main === module) {
+  server = app.listen(config.port, () => {
+    console.info(`Backend listening on port ${config.port}.`)
+    void connectDatabase(config.mongoUri)
+  })
+}
 
 module.exports = { app, server }
