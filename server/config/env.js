@@ -21,12 +21,8 @@ function readPositiveInteger(name, defaultValue) {
   return parsed
 }
 
-function readRequired(name) {
-  const value = process.env[name]?.trim()
-  if (!value) {
-    throw new Error(`Missing required configuration: ${name}.`)
-  }
-  return value
+function readOptional(name) {
+  return process.env[name]?.trim() || null
 }
 
 function validateClientOrigin(value) {
@@ -56,10 +52,13 @@ if (port > 65535) {
   throw new Error('Invalid configuration: PORT must be between 1 and 65535.')
 }
 
+const mongoUri = readOptional('MONGODB_URI')
+const clientOrigin = readOptional('CLIENT_ORIGIN')
+
 const config = Object.freeze({
   port,
-  mongoUri: readRequired('MONGODB_URI'),
-  clientOrigin: validateClientOrigin(readRequired('CLIENT_ORIGIN')),
+  mongoUri,
+  clientOrigin: clientOrigin ? validateClientOrigin(clientOrigin) : null,
   rateLimitWindowMs: readPositiveInteger('RATE_LIMIT_WINDOW_MS', 15 * 60 * 1000),
   rateLimitMaxRequests: readPositiveInteger('RATE_LIMIT_MAX_REQUESTS', 100),
   resendApiKey: process.env.RESEND_API_KEY?.trim() || null,

@@ -1,16 +1,14 @@
-const { app } = require('../server/server')
-const config = require('../server/config/env')
-const { connectDatabase, isDatabaseConnected } = require('../server/config/db')
+import server from '../server/server.js'
+import config from '../server/config/env.js'
+import database from '../server/config/db.js'
 
-let databaseConnection
+const { app } = server
+const { connectDatabase, isDatabaseConnected } = database
 
-async function handler(request, response) {
-  if (!isDatabaseConnected()) {
-    databaseConnection ||= connectDatabase(config.mongoUri)
-    await databaseConnection
+export default async function handler(request, response) {
+  if (!isDatabaseConnected() && config.mongoUri) {
+    await connectDatabase(config.mongoUri)
   }
 
   return app(request, response)
 }
-
-module.exports = handler
